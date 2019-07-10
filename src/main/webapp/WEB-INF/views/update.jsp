@@ -13,7 +13,7 @@
     </head>
     <body>
         <h1>Update a Trainer</h1><br>
-        <form:form  action="update" method="POST" modelAttribute="Trainer">
+        <form:form  action="updateform" method="POST" modelAttribute="trainer">
             First Name : <form:input path="firstName" /><br>
             Last Name : <form:input path="lastName" /><br>
             Subject : <form:input path="subject" /><br>

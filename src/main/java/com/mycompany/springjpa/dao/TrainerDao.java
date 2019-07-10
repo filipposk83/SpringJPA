@@ -26,7 +26,7 @@ public class TrainerDao {
         return trainers;
     }
 
-    public Trainer getTrainerById(Integer id) {
+    public Trainer getTrainerById(Long id) {
         Trainer t = null;
         EntityManagerFactory emf = javax.persistence.Persistence.createEntityManagerFactory("com.mycompany_SpringJPA_war_1.0-SNAPSHOTPU");
         EntityManager em = emf.createEntityManager();
@@ -84,18 +84,14 @@ public class TrainerDao {
         }
         return deleted;
     }
-    
+    //???????????????????????????????????????????????????????????????????????????
     public boolean updateTrainer(Trainer t) {
         boolean updated = false;
         EntityManagerFactory emf = javax.persistence.Persistence.createEntityManagerFactory("com.mycompany_SpringJPA_war_1.0-SNAPSHOTPU");
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         try {
-            Query query = em.createNamedQuery("Trainer.findByTrainerId").setParameter("trainerId", t.getTrainerId());
-            t = (Trainer) query.getSingleResult();
-            t.setFirstName(t.getFirstName());
-            t.setLastName(t.getLastName());
-            t.setSubject(t.getSubject());
+            em.merge(t);
             em.getTransaction().commit();
             updated = true;
         } catch (Exception e) {

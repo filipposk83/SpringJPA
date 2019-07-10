@@ -12,7 +12,7 @@ public class TrainerService {
         return list;
     }
     
-    public Trainer TrainerById(Integer id){
+    public Trainer TrainerById(Long id){
         TrainerDao tdao = new TrainerDao();
         Trainer t = tdao.getTrainerById(id);
         return t;

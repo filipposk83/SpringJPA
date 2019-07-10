@@ -39,7 +39,7 @@ public class Trainer implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "trainer_id", nullable = false)
-    private Integer trainerId;
+    private Long trainerId;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 45)
@@ -59,22 +59,29 @@ public class Trainer implements Serializable {
     public Trainer() {
     }
 
-    public Trainer(Integer trainerId) {
+    public Trainer(Long trainerId) {
         this.trainerId = trainerId;
     }
 
-    public Trainer(Integer trainerId, String firstName, String lastName, String subject) {
+    public Trainer(String firstName, String lastName, String subject) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.subject = subject;
+    }
+    
+
+    public Trainer(Long trainerId, String firstName, String lastName, String subject) {
         this.trainerId = trainerId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.subject = subject;
     }
 
-    public Integer getTrainerId() {
+    public Long getTrainerId() {
         return trainerId;
     }
 
-    public void setTrainerId(Integer trainerId) {
+    public void setTrainerId(Long trainerId) {
         this.trainerId = trainerId;
     }
 

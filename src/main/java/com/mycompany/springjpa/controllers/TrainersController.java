@@ -59,19 +59,23 @@ public class TrainersController {
     }
     
     @RequestMapping(value= "/update/{id}", method = RequestMethod.GET)
-    public String updateTrainer(ModelMap model, @PathVariable("id") String id) {
+    public String updateTrainer(ModelMap model, @PathVariable("id") Long id) {
         TrainerService ts = new TrainerService();
-        Integer tid = Integer.parseInt(id);
-        Trainer t = ts.TrainerById(tid);
-        model.addAttribute("Trainer", t);
+        Trainer t = ts.TrainerById(id);
+        model.addAttribute("trainer", t);
         return "update";
     }
     
-    @RequestMapping(value= "/update", method = RequestMethod.POST)
-    public String update(ModelMap model, @ModelAttribute("Trainer")Trainer t) {
+    //is not working
+    @RequestMapping(value= "/updateform", method = RequestMethod.POST)
+    public String update(ModelMap model, @ModelAttribute("trainer")Trainer t) {
         TrainerService ts = new TrainerService();
         String success;
-        if(ts.TrainerUpdate(t)){
+        Trainer tr = ts.TrainerById(t.getTrainerId());
+        tr.setFirstName(t.getFirstName());
+        tr.setLastName(t.getLastName());
+        tr.setSubject(t.getSubject());
+        if(ts.TrainerUpdate(tr)){
             success = "Update success";
         }else{
             success = "Update NOT success";
